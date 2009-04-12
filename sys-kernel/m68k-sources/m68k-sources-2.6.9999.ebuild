@@ -1,0 +1,51 @@
+# Copyright 1999-2009 Gentoo Foundation
+# Distributed under the terms of the GNU General Public License v2
+
+ETYPE="sources"
+
+inherit git kernel-2 eutils
+detect_version
+
+RC=${PVR##*_}
+
+KV_BASE=${KV_MAJOR}.${KV_MINOR}.${KV_PATCH}
+KV_MOD=${KV_FULL##*-}
+KV_MAIN="linux-${KV_MOD}"
+EGIT_PROJECT="linux-${KV_FULL}"
+EGIT_REPO_URI="git://git.kernel.org/pub/scm/linux/kernel/git/geert/${KV_MAIN}"
+EGIT_BRANCH="master"
+
+HOMEPAGE="http://www.linux-m68k.org/"
+DESCRIPTION="m68k 2.6.29 git kernel sources"
+
+IUSE=""
+KEYWORDS=""
+
+K_NOUSENAME="yes"
+K_PREPATCHED="yes"
+
+K_EXTRAEINFO="This kernel is not supported by Gentoo due to its unstable and
+experimental nature. If you have any issues, try a matching vanilla-sources
+ebuild -- if the problem is not there, please contact the upstream kernel
+developers at http://bugme.osdl.org and on the linux-kernel mailing list to
+report the problem so it can be fixed in time for the next kernel release."
+
+src_unpack() {
+	git_src_unpack
+
+	cd "${EGIT_STORE_DIR}/${EGIT_PROJECT}"
+	local last_commit_abbrev=$(git log -n 1 --no-color --pretty='format:%h')
+
+	EXTRAVERSION="-${KV_MOD}.git-${last_commit_abbrev}"
+
+	S=${WORKDIR}/${EGIT_PROJECT}
+
+	cd "${S}"
+
+	unpack_set_extraversion
+}
+
+pkg_postinst() {
+	postinst_sources
+}
+

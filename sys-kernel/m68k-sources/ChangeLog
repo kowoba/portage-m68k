@@ -1,0 +1,13 @@
+# ChangeLog for sys-kernel/openvz-sources
+# Copyright 1999-2009 Gentoo Foundation; Distributed under the GPL v2
+
+*m68k-sources-2.6.9999 (12 Apr 2009)
+
+  12 Apr 2009; Kolbjørn Barmen <gentoo@kolla.no>
+  +m68k-sources-2.6.9999.ebuild
+
+*m68k-sources-2.6.29 (12 Apr 2009)
+
+  12 Apr 2009; Kolbjørn Barmen <gentoo@kolla.no>
+  +m68k-sources-2.6.29.ebuild
+
